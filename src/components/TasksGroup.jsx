@@ -2,7 +2,6 @@ import React from "react";
 import Task from "./Task";
 
 function TasksGroup({ status, tasks }) {
-  console.log(tasks);
   return (
     <article className={`taskboard__group taskboard__group--${status.id}`}>
       <h3

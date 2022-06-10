@@ -15,6 +15,12 @@ export default function tasks(state = initialState, action) {
         tasks: [...state.tasks, { title: task, status, style, id }],
       };
     }
+    case TASK_TYPES.FETCH_TASKS_SUCCEDED: {
+      return {
+        ...state,
+        tasks: action.payload.tasks,
+      };
+    }
     default:
       return state;
   }

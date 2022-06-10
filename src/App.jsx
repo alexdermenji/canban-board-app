@@ -1,10 +1,16 @@
-import { connect } from "react-redux";
+import { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 import AddTask from "./components/AddTask";
 import Header from "./components/Header";
 import TasksBoard from "./components/TasksBoard";
 import "./css/style.css";
+import { fetchTasks } from "./redux/actions";
 
-function App() {
+function App(props) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
   return (
     <div className="App">
       <Header />

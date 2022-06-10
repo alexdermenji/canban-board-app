@@ -7,7 +7,7 @@ export const TASK_STATUSES = {
 
 export const TASK_STATUS_NAMES = [
   { title: "Backlog", id: "backlog" },
-  { title: "In progress", id: "processing" },
+  { title: "In Progress", id: "processing" },
   { title: "Done", id: "done" },
   { title: "Basket", id: "basket" },
 ];
@@ -16,4 +16,5 @@ export const TASK_TYPES = {
   CREATE_TASK: "CREATE_TASK",
   UPDATE_TASK: "UPDATE_TASK",
   DELETE_TASK: "DELETE_TASK",
+  FETCH_TASKS_SUCCEDED: "FETCH_TASKS_SUCCEDED",
 };

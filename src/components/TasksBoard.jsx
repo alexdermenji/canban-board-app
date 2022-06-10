@@ -6,12 +6,12 @@ import TasksGroup from "./TasksGroup";
 
 function TasksBoard() {
   const tasks = useSelector(selectTasks);
+  console.log(tasks);
   return (
     <>
       {TASK_STATUS_NAMES.map((status) => {
-        console.log(status);
         const statusTasks = tasks.filter(
-          (task) => task.status === status.title
+          (task) => task.status.title === status.title
         );
         return (
           <TasksGroup key={status.id} status={status} tasks={statusTasks} />
