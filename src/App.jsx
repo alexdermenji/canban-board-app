@@ -1,6 +1,7 @@
+import { connect } from "react-redux";
 import AddTask from "./components/AddTask";
 import Header from "./components/Header";
-import TasksList from "./components/TasksList";
+import TasksBoard from "./components/TasksBoard";
 import "./css/style.css";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
           <AddTask />
           <section className="taskboard">
             <h2 className="visually-hidden">Ваши задачи:</h2>
-            <TasksList />
+            <TasksBoard />
           </section>
         </div>
       </main>
@@ -20,4 +21,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks,
+  };
+};
+
+export default connect(mapStateToProps)(App);

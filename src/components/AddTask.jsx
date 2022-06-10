@@ -1,13 +1,31 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { TASK_STATUSES, TASK_STATUS_NAMES } from "../data";
+import { createTask } from "../redux/actions";
 
 function AddTask() {
+  const [inputValue, setInputValue] = React.useState("");
+  const dispatch = useDispatch();
+  const onCreateTask = (e) => {
+    e.preventDefault();
+    dispatch(
+      createTask(inputValue, TASK_STATUS_NAMES[0], TASK_STATUSES.BACKLOG)
+    );
+    setInputValue("");
+  };
   return (
     <section className="add-task">
       <h2 className="visually-hidden">Добавить задачу</h2>
-      <form className="add-task__form" aria-label="Форма добавления задачи">
+      <form
+        className="add-task__form"
+        aria-label="Форма добавления задачи"
+        onSubmit={onCreateTask}
+      >
         <div className="add-task__input-wrapper">
           <label htmlFor="add-task">Новая задача</label>
           <input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             type="text"
             name="task-name"
             id="add-task"

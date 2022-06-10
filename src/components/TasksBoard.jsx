@@ -1,91 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { TASK_STATUS_NAMES } from "../data";
+import { selectTasks } from "../redux/selectors";
+import TasksGroup from "./TasksGroup";
 
-function TasksList() {
+function TasksBoard() {
+  const tasks = useSelector(selectTasks);
   return (
     <>
-      {" "}
-      <article className="taskboard__group taskboard__group--backlog">
-        <h3 className="taskboard__group-heading taskboard__group-heading--backlog">
-          Бэклог
-        </h3>
-        <div className="taskboard__list">
-          <div className="taskboard__item task task--active">
-            <div className="task__body">
-              <p className="task__view">Название первой задачи</p>
-              <input
-                className="task__input"
-                type="text"
-                value="Название первой задачи"
-              />
-            </div>
-            <button
-              className="task__edit"
-              type="button"
-              aria-label="Изменить"
-            ></button>
-          </div>
-          <div className="taskboard__item task">
-            <div className="task__body">
-              <p className="task__view">Название первой задачи</p>
-              <input
-                className="task__input"
-                type="text"
-                value="Название первой задачи"
-              />
-            </div>
-            <button
-              className="task__edit"
-              type="button"
-              aria-label="Изменить"
-            ></button>
-          </div>
-          <div className="taskboard__item task">
-            <div className="task__body">
-              <p className="task__view">Название первой задачи</p>
-              <input
-                className="task__input"
-                type="text"
-                value="Название первой задачи"
-              />
-            </div>
-            <button
-              className="task__edit"
-              type="button"
-              aria-label="Изменить"
-            ></button>
-          </div>
-          <div className="taskboard__item task">
-            <div className="task__body">
-              <p className="task__view">Название первой задачи</p>
-              <input
-                className="task__input"
-                type="text"
-                value="Название первой задачи"
-              />
-            </div>
-            <button
-              className="task__edit"
-              type="button"
-              aria-label="Изменить"
-            ></button>
-          </div>
-          <div className="taskboard__item task">
-            <div className="task__body">
-              <p className="task__view">Название первой задачи</p>
-              <input
-                className="task__input"
-                type="text"
-                value="Название первой задачи"
-              />
-            </div>
-            <button
-              className="task__edit"
-              type="button"
-              aria-label="Изменить"
-            ></button>
-          </div>
-        </div>
-      </article>
+      {TASK_STATUS_NAMES.map((status) => {
+        const statusTasks = tasks.filter((task) => task.status === status);
+        return <TasksGroup key={status} status={status} tasks={statusTasks} />;
+      })}
+
       <article className="taskboard__group taskboard__group--processing">
         <h3 className="taskboard__group-heading taskboard__group-heading--processing">
           В процессе
@@ -98,6 +25,7 @@ function TasksList() {
             <div className="task__body">
               <p className="task__view">Название первой задачи</p>
               <input
+                onChange={() => {}}
                 className="task__input"
                 type="text"
                 value="Название первой задачи"
@@ -113,6 +41,7 @@ function TasksList() {
             <div className="task__body">
               <p className="task__view">Название первой задачи</p>
               <input
+                onChange={() => {}}
                 className="task__input"
                 type="text"
                 value="Название первой задачи"
@@ -128,6 +57,7 @@ function TasksList() {
             <div className="task__body">
               <p className="task__view">Название первой задачи</p>
               <input
+                onChange={() => {}}
                 className="task__input"
                 type="text"
                 value="Название первой задачи"
@@ -144,6 +74,7 @@ function TasksList() {
           <div className="task__body">
             <p className="task__view">Название первой задачи</p>
             <input
+              onChange={() => {}}
               className="task__input"
               type="text"
               value="Название первой задачи"
@@ -168,6 +99,7 @@ function TasksList() {
             <div className="task__body">
               <p className="task__view">Название первой задачи</p>
               <input
+                onChange={() => {}}
                 className="task__input"
                 type="text"
                 value="Название первой задачи"
@@ -183,6 +115,7 @@ function TasksList() {
             <div className="task__body">
               <p className="task__view">Название первой задачи</p>
               <input
+                onChange={() => {}}
                 className="task__input"
                 type="text"
                 value="Название первой задачи"
@@ -205,6 +138,7 @@ function TasksList() {
             <div className="task__body">
               <p className="task__view">Название первой задачи</p>
               <input
+                onChange={() => {}}
                 className="task__input"
                 type="text"
                 value="Название первой задачи"
@@ -220,6 +154,7 @@ function TasksList() {
             <div className="task__body">
               <p className="task__view">Название первой задачи</p>
               <input
+                onChange={() => {}}
                 className="task__input"
                 type="text"
                 value="Название первой задачи"
@@ -270,4 +205,4 @@ function TasksList() {
   );
 }
 
-export default TasksList;
+export default TasksBoard;
