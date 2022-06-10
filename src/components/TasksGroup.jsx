@@ -4,9 +4,11 @@ import Task from "./Task";
 function TasksGroup({ status, tasks }) {
   console.log(tasks);
   return (
-    <article className="taskboard__group taskboard__group--backlog">
-      <h3 className="taskboard__group-heading taskboard__group-heading--backlog">
-        {status}
+    <article className={`taskboard__group taskboard__group--${status.id}`}>
+      <h3
+        className={`taskboard__group-heading taskboard__group-heading--${status.id}`}
+      >
+        {status.title}
       </h3>
       <div className="taskboard__list">
         {/* <div className="taskboard__item task task--active">

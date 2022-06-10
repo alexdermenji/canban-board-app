@@ -9,8 +9,13 @@ function TasksBoard() {
   return (
     <>
       {TASK_STATUS_NAMES.map((status) => {
-        const statusTasks = tasks.filter((task) => task.status === status);
-        return <TasksGroup key={status} status={status} tasks={statusTasks} />;
+        console.log(status);
+        const statusTasks = tasks.filter(
+          (task) => task.status === status.title
+        );
+        return (
+          <TasksGroup key={status.id} status={status} tasks={statusTasks} />
+        );
       })}
 
       <article className="taskboard__group taskboard__group--processing">

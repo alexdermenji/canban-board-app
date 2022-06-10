@@ -5,7 +5,12 @@ export const TASK_STATUSES = {
   BASKET: "basket",
 };
 
-export const TASK_STATUS_NAMES = ["Backlog", "In progress", "Done", "Basket"];
+export const TASK_STATUS_NAMES = [
+  { title: "Backlog", id: "backlog" },
+  { title: "In progress", id: "processing" },
+  { title: "Done", id: "done" },
+  { title: "Basket", id: "basket" },
+];
 
 export const TASK_TYPES = {
   CREATE_TASK: "CREATE_TASK",
