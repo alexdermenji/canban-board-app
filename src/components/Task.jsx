@@ -1,7 +1,6 @@
 import React from "react";
 
 function Task({ task }) {
-  console.log(task.status);
   return (
     <div className={`taskboard__item task task--${task.style}`}>
       <div className="task__body">
