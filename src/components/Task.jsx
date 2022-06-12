@@ -4,33 +4,47 @@ import { TASK_STATUS_NAMES } from "../data";
 import { editTask } from "../redux/actions";
 
 function Task({ task }) {
-  console.log(task.status.title);
+  const [isActive, setIsActive] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState(task.title);
   const dispatch = useDispatch();
   const onStatusChange = (e) => {
     dispatch(
       editTask(task.id, {
-        title: e.target.options[e.target.selectedIndex].text,
-        id: e.target.value,
+        status: {
+          title: e.target.options[e.target.selectedIndex].text,
+          id: e.target.value,
+        },
       })
     );
   };
+
+  const onIconClick = (e) => {
+    setIsActive(!isActive);
+    if (isActive) {
+      dispatch(
+        editTask(task.id, {
+          title: inputValue,
+        })
+      );
+    }
+  };
   return (
-    <div className={`taskboard__item task task--${task.style}`}>
+    <div
+      className={`taskboard__item task task--${task.style} ${
+        isActive ? "task--active" : ""
+      }`}
+    >
       <div className="task__body">
         <p className="task__view">{task.title}</p>
         <input
-          onChange={() => {}}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+          }}
           className="task__input"
           type="text"
-          value={task.title}
+          value={inputValue}
         />
       </div>
-      {/* <select value={task.status.title} onChange={onStatusChange}>
-        <option value="backlog">Backlog</option>
-        <option value="processing">In progress</option>
-        <option value="done">Done</option>
-        <option value="basket">Basket</option>
-      </select> */}
 
       <select value={task.status.id} onChange={onStatusChange}>
         {TASK_STATUS_NAMES.map((status) => (
@@ -40,6 +54,7 @@ function Task({ task }) {
         ))}
       </select>
       <button
+        onClick={onIconClick}
         className="task__edit"
         type="button"
         aria-label="Изменить"
