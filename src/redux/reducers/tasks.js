@@ -15,6 +15,21 @@ export default function tasks(state = initialState, action) {
         tasks: [...state.tasks, { title, status, style, id }],
       };
     }
+    case TASK_TYPES.EDIT_TASK_SUCCEDED: {
+      console.log(action.payload);
+      const { id, title, status, style } = action.payload.task;
+      const tasks = state.tasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, title, status, style };
+        }
+        return task;
+      });
+      return {
+        ...state,
+        tasks,
+      };
+    }
+
     case TASK_TYPES.FETCH_TASKS_STARTED: {
       return {
         ...state,

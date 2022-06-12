@@ -57,3 +57,28 @@ export const createTaskSucceded = ({ id, status, style, title }) => {
     },
   };
 };
+
+function getTaskById(tasks, id) {
+  return tasks.find((task) => task.id === id);
+}
+
+export function editTask(id, params = {}) {
+  return (dispatch, getState) => {
+    const task = getTaskById(getState().tasks, id);
+    const updatedTask = { ...task };
+    updatedTask.status = params;
+    updatedTask.style = params.id;
+    api.editTask(id, updatedTask).then((resp) => {
+      dispatch(editTaskSucceeded(resp.data));
+    });
+  };
+}
+
+export function editTaskSucceeded(task) {
+  return {
+    type: TASK_TYPES.EDIT_TASK_SUCCEDED,
+    payload: {
+      task,
+    },
+  };
+}

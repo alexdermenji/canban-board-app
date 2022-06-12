@@ -10,13 +10,13 @@ function TasksBoard() {
   const error = useSelector(selectError);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
-
   return (
     <>
       {TASK_STATUS_NAMES.map((status) => {
         const statusTasks = tasks.filter(
-          (task) => task.status.title === status.title
+          (task) => task.status.id === status.id
         );
+
         return (
           <TasksGroup key={status.id} status={status} tasks={statusTasks} />
         );
