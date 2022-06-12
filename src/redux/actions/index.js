@@ -38,14 +38,22 @@ export function fetchTasksFailed(error) {
   };
 }
 
-export const createTask = (task, status, style) => {
+export function createTask(title, status, style) {
+  return (dispatch) => {
+    api.createTask({ title, status, style }).then((resp) => {
+      dispatch(createTaskSucceded(resp.data));
+    });
+  };
+}
+
+export const createTaskSucceded = ({ id, status, style, title }) => {
   return {
-    type: TASK_TYPES.CREATE_TASK,
+    type: TASK_TYPES.CREATE_TASK_SUCCEDED,
     payload: {
-      id: task,
-      task,
+      id,
       status,
       style,
+      title,
     },
   };
 };

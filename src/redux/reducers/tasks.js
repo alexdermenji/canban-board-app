@@ -8,11 +8,11 @@ const initialState = {
 
 export default function tasks(state = initialState, action) {
   switch (action.type) {
-    case TASK_TYPES.CREATE_TASK: {
-      const { task, status, style, id } = action.payload;
+    case TASK_TYPES.CREATE_TASK_SUCCEDED: {
+      const { title, status, style, id } = action.payload;
       return {
         ...state,
-        tasks: [...state.tasks, { title: task, status, style, id }],
+        tasks: [...state.tasks, { title, status, style, id }],
       };
     }
     case TASK_TYPES.FETCH_TASKS_STARTED: {
