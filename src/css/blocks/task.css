@@ -28,7 +28,7 @@
 }
 
 .task:hover {
-  cursor: pointer;
+  cursor: grab;
 }
 
 .task p {

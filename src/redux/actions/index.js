@@ -29,6 +29,7 @@ export function fetchTasksSucceded(tasks) {
     },
   };
 }
+
 export function fetchTasksFailed(error) {
   return {
     type: "FETCH_TASKS_FAILED",
@@ -65,6 +66,8 @@ function getTaskById(tasks, id) {
 export function editTask(id, params = {}) {
   return (dispatch, getState) => {
     const task = getTaskById(getState().tasks, id);
+    console.log(params);
+    console.log(task);
     const updatedTask = { ...task, ...params };
     api.editTask(id, updatedTask).then((resp) => {
       dispatch(editTaskSucceeded(resp.data));

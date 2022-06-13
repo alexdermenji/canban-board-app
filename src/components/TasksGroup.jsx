@@ -1,7 +1,27 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { editTask } from "../redux/actions";
 import Task from "./Task";
+import { Droppable } from "react-beautiful-dnd";
 
-function TasksGroup({ status, tasks }) {
+function TasksGroup({
+  status,
+  tasks,
+  setCurrentBoard,
+  setCurrentTask,
+  currentBoard,
+  currentTask,
+}) {
+  const dispatch = useDispatch();
+  const dropHandler = (e) => {
+    e.preventDefault();
+    dispatch(editTask(currentTask.id, { status, style: status.id }));
+    setCurrentBoard(status);
+  };
+
+  const dragOverHandler = (e) => {
+    e.preventDefault();
+  };
   return (
     <article className={`taskboard__group taskboard__group--${status.id}`}>
       <h3
@@ -9,26 +29,40 @@ function TasksGroup({ status, tasks }) {
       >
         {status.title}
       </h3>
-      <div className="taskboard__list">
-        {/* <div className="taskboard__item task task--active">
-          <div className="task__body">
-            <p className="task__view">Название первой задачи</p>
-            <input
-              onChange={() => {}}
-              className="task__input"
-              type="text"
-              value="Название первой задачи"
-            />
+      <Droppable droppableId={String(status.code)}>
+        {(provided) => (
+          <div
+            className="taskboard__list"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {tasks.map((task, index) => (
+              <Task
+                id={task.id}
+                index={index}
+                tasks={tasks}
+                key={task.id}
+                task={task}
+                setCurrentBoard={setCurrentBoard}
+                setCurrentTask={setCurrentTask}
+                currentBoard={currentBoard}
+                currentTask={currentTask}
+              />
+            ))}
+            {!tasks.length && (
+              <div
+                className="taskboard__item task task--empty"
+                draggable={true}
+                onDragOver={(e) => dragOverHandler(e)}
+                onDrop={(e) => dropHandler(e, status)}
+              >
+                <p>Перетащите карточку</p>
+              </div>
+            )}
+            {provided.placeholder}
           </div>
-          <button
-            className="task__edit"
-            type="button"
-            aria-label="Изменить"
-          ></button>
-        </div> */}
-
-        {tasks && tasks.map((task) => <Task key={task.id} task={task} />)}
-      </div>
+        )}
+      </Droppable>
     </article>
   );
 }

@@ -6,10 +6,10 @@ export const TASK_STATUSES = {
 };
 
 export const TASK_STATUS_NAMES = [
-  { title: "Backlog", id: "backlog" },
-  { title: "In Progress", id: "processing" },
-  { title: "Done", id: "done" },
-  { title: "Basket", id: "basket" },
+  { title: "Backlog", id: "backlog", code: 0 },
+  { title: "In Progress", id: "processing", code: 1 },
+  { title: "Done", id: "done", code: 2 },
+  { title: "Basket", id: "basket", code: 3 },
 ];
 
 export const TASK_TYPES = {

@@ -5,6 +5,9 @@ import { selectError, selectIsLoading, selectTasks } from "../redux/selectors";
 import TasksGroup from "./TasksGroup";
 
 function TasksBoard() {
+  const [currentBoard, setCurrentBoard] = React.useState(null);
+  const [currentTask, setCurrentTask] = React.useState(null);
+
   const tasks = useSelector(selectTasks);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
@@ -18,10 +21,18 @@ function TasksBoard() {
         );
 
         return (
-          <TasksGroup key={status.id} status={status} tasks={statusTasks} />
+          <TasksGroup
+            key={status.id}
+            status={status}
+            tasks={statusTasks}
+            setCurrentBoard={setCurrentBoard}
+            setCurrentTask={setCurrentTask}
+            currentBoard={currentBoard}
+            currentTask={currentTask}
+          />
         );
       })}
-      {/* <article className="taskboard__group taskboard__group--processing">
+      <article className="taskboard__group taskboard__group--processing">
         <h3 className="taskboard__group-heading taskboard__group-heading--processing">
           В процессе
         </h3>
@@ -208,7 +219,7 @@ function TasksBoard() {
           </svg>
           <span>Очистить</span>
         </button>
-      </article> */}
+      </article>
     </>
   );
 }
