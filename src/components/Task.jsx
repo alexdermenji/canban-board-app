@@ -19,18 +19,6 @@ function Task({ id, index, tasks, task }) {
     }
   };
 
-  // const dragStartHandler = (e, board, card) => {
-  //   // dispatch(editTask(task.id, { status: { title: "", id: "" } }));
-  //   setCurrentBoard(board);
-  //   setCurrentTask(card);
-  // };
-
-  // const dropHandler = (e, board) => {
-  //   dispatch(
-  //     editTask(currentTask.id, { status: board.status, style: board.style })
-  //   );
-  // };
-
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -54,14 +42,6 @@ function Task({ id, index, tasks, task }) {
               value={inputValue}
             />
           </div>
-
-          {/* <select value={task.status.id} onChange={onStatusChange}>
- {TASK_STATUS_NAMES.map((status) => (
-   <option key={status.id} value={status.id}>
-     {status.title}
-   </option>
- ))}
-</select> */}
           <button
             onClick={onIconClick}
             className="task__edit"

@@ -17,7 +17,7 @@ export function fetchTasks() {
 
 export function fetchTasksStarted() {
   return {
-    type: "FETCH_TASKS_STARTED",
+    type: TASK_TYPES.FETCH_TASKS_STARTED,
   };
 }
 
@@ -32,7 +32,7 @@ export function fetchTasksSucceded(tasks) {
 
 export function fetchTasksFailed(error) {
   return {
-    type: "FETCH_TASKS_FAILED",
+    type: TASK_TYPES.FETCH_TASKS_FAILED,
     payload: {
       error,
     },

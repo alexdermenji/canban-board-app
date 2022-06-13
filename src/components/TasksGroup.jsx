@@ -41,7 +41,8 @@ function TasksGroup({ status, tasks, isBasket }) {
                 <p>{isBasket ? "Basket is empty" : "Drag the card"}</p>
               </div>
             )}
-            {isBasket && (
+            {provided.placeholder}
+            {isBasket && tasks.length > 0 && (
               <button
                 onClick={deleteTasksHandler}
                 className="taskboard__button button button--clear"
@@ -74,7 +75,6 @@ function TasksGroup({ status, tasks, isBasket }) {
                 <span>Clear</span>
               </button>
             )}
-            {provided.placeholder}
           </div>
         )}
       </Droppable>
