@@ -49,6 +49,13 @@ export default function tasks(state = initialState, action) {
         isLoading: false,
       };
     }
+    case TASK_TYPES.DELETE_TASK: {
+      const tasks = state.tasks.filter((task) => task.id !== action.payload);
+      return {
+        ...state,
+        tasks,
+      };
+    }
     default:
       return state;
   }

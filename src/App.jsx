@@ -22,7 +22,6 @@ function App(props) {
     }
 
     if (source.droppableId !== destination.droppableId) {
-      console.log("diferent column");
       dispatch(
         editTask(draggableId, {
           status: TASK_STATUS_NAMES[destination.droppableId],

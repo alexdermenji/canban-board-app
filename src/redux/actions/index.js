@@ -66,8 +66,6 @@ function getTaskById(tasks, id) {
 export function editTask(id, params = {}) {
   return (dispatch, getState) => {
     const task = getTaskById(getState().tasks, id);
-    console.log(params);
-    console.log(task);
     const updatedTask = { ...task, ...params };
     api.editTask(id, updatedTask).then((resp) => {
       dispatch(editTaskSucceeded(resp.data));
@@ -81,5 +79,21 @@ export function editTaskSucceeded(task) {
     payload: {
       task,
     },
+  };
+}
+
+export function deleteTasks(id) {
+  return (dispatch) => {
+    dispatch(deleteTaskSucceded(id));
+    api.deleteTasks(id).then((resp) => {
+      console.log(resp.data);
+    });
+  };
+}
+
+export function deleteTaskSucceded(id) {
+  return {
+    type: TASK_TYPES.DELETE_TASK,
+    payload: id,
   };
 }

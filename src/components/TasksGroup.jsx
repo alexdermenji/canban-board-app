@@ -1,27 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { editTask } from "../redux/actions";
 import Task from "./Task";
 import { Droppable } from "react-beautiful-dnd";
+import { deleteTasks } from "../redux/actions";
 
-function TasksGroup({
-  status,
-  tasks,
-  setCurrentBoard,
-  setCurrentTask,
-  currentBoard,
-  currentTask,
-}) {
+function TasksGroup({ status, tasks, isBasket }) {
   const dispatch = useDispatch();
-  const dropHandler = (e) => {
-    e.preventDefault();
-    dispatch(editTask(currentTask.id, { status, style: status.id }));
-    setCurrentBoard(status);
+  const deleteTasksHandler = () => {
+    tasks.forEach((task) => dispatch(deleteTasks(task.id)));
   };
 
-  const dragOverHandler = (e) => {
-    e.preventDefault();
-  };
   return (
     <article className={`taskboard__group taskboard__group--${status.id}`}>
       <h3
@@ -43,21 +31,48 @@ function TasksGroup({
                 tasks={tasks}
                 key={task.id}
                 task={task}
-                setCurrentBoard={setCurrentBoard}
-                setCurrentTask={setCurrentTask}
-                currentBoard={currentBoard}
-                currentTask={currentTask}
               />
             ))}
             {!tasks.length && (
               <div
                 className="taskboard__item task task--empty"
                 draggable={true}
-                onDragOver={(e) => dragOverHandler(e)}
-                onDrop={(e) => dropHandler(e, status)}
               >
-                <p>Перетащите карточку</p>
+                <p>{isBasket ? "Basket is empty" : "Drag the card"}</p>
               </div>
+            )}
+            {isBasket && (
+              <button
+                onClick={deleteTasksHandler}
+                className="taskboard__button button button--clear"
+                type="button"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="15.5374"
+                    y="5.16638"
+                    width="1.83333"
+                    height="14.6667"
+                    transform="rotate(45 15.5374 5.16638)"
+                    fill="white"
+                  />
+                  <rect
+                    x="16.8337"
+                    y="15.5372"
+                    width="1.83333"
+                    height="14.6667"
+                    transform="rotate(135 16.8337 15.5372)"
+                    fill="white"
+                  />
+                </svg>
+                <span>Clear</span>
+              </button>
             )}
             {provided.placeholder}
           </div>
