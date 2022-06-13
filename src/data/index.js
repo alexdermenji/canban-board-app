@@ -5,11 +5,11 @@ export const TASK_STATUSES = {
   BASKET: "basket",
 };
 
-export const TASK_STATUS_NAMES = [
-  { title: "Backlog", id: "backlog", code: 0 },
-  { title: "In Progress", id: "processing", code: 1 },
-  { title: "Done", id: "done", code: 2 },
-  { title: "Basket", id: "basket", code: 3 },
+export const BOARDS = [
+  { title: "Backlog", id: "backlog", code: 0, style: "backlog" },
+  { title: "In Progress", id: "processing", code: 1, style: "processing" },
+  { title: "Done", id: "done", code: 2, style: "done" },
+  { title: "Basket", id: "basket", code: 3, style: "basket" },
 ];
 
 export const TASK_TYPES = {

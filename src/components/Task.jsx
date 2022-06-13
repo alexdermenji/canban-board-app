@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { editTask } from "../redux/actions";
 import { Draggable } from "react-beautiful-dnd";
 
-function Task({ id, index, tasks, task }) {
+function Task({ id, index, task }) {
   const [isActive, setIsActive] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(task.title);
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function Task({ id, index, tasks, task }) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`taskboard__item task task--${task.style} ${
+          className={`taskboard__item task task--${task.boardId} ${
             isActive ? "task--active" : ""
           }`}
           draggable={true}

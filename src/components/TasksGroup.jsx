@@ -4,20 +4,20 @@ import Task from "./Task";
 import { Droppable } from "react-beautiful-dnd";
 import { deleteTasks } from "../redux/actions";
 
-function TasksGroup({ status, tasks, isBasket }) {
+function TasksGroup({ board, tasks, isBasket }) {
   const dispatch = useDispatch();
   const deleteTasksHandler = () => {
     tasks.forEach((task) => dispatch(deleteTasks(task.id)));
   };
 
   return (
-    <article className={`taskboard__group taskboard__group--${status.id}`}>
+    <article className={`taskboard__group taskboard__group--${board.id}`}>
       <h3
-        className={`taskboard__group-heading taskboard__group-heading--${status.id}`}
+        className={`taskboard__group-heading taskboard__group-heading--${board.id}`}
       >
-        {status.title}
+        {board.title}
       </h3>
-      <Droppable droppableId={String(status.code)}>
+      <Droppable droppableId={String(board.code)}>
         {(provided) => (
           <div
             className="taskboard__list"
@@ -25,13 +25,7 @@ function TasksGroup({ status, tasks, isBasket }) {
             ref={provided.innerRef}
           >
             {tasks.map((task, index) => (
-              <Task
-                id={task.id}
-                index={index}
-                tasks={tasks}
-                key={task.id}
-                task={task}
-              />
+              <Task id={task.id} index={index} key={task.id} task={task} />
             ))}
             {!tasks.length && (
               <div

@@ -6,7 +6,7 @@ import TasksBoard from "./components/TasksBoard";
 import "./css/style.css";
 import { editTask, fetchTasks } from "./redux/actions";
 import { DragDropContext } from "react-beautiful-dnd";
-import { TASK_STATUS_NAMES } from "./data";
+import { BOARDS } from "./data";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function App(props) {
 
   const onDragEndHandler = (result) => {
     const { destination, source, draggableId } = result;
-
+    console.log(destination);
     if (!destination) {
       return;
     }
@@ -24,8 +24,10 @@ function App(props) {
     if (source.droppableId !== destination.droppableId) {
       dispatch(
         editTask(draggableId, {
-          status: TASK_STATUS_NAMES[destination.droppableId],
-          style: TASK_STATUS_NAMES[destination.droppableId].id,
+          boardTitle: BOARDS[destination.droppableId].title,
+          boardId: BOARDS[destination.droppableId].id,
+          boardCode: BOARDS[destination.droppableId].code,
+          boardStyle: BOARDS[destination.droppableId].style,
         })
       );
       return;

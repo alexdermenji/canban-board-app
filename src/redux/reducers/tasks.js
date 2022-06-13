@@ -9,17 +9,17 @@ const initialState = {
 export default function tasks(state = initialState, action) {
   switch (action.type) {
     case TASK_TYPES.CREATE_TASK_SUCCEDED: {
-      const { title, status, style, id } = action.payload;
       return {
         ...state,
-        tasks: [...state.tasks, { title, status, style, id }],
+        tasks: [...state.tasks, { ...action.payload }],
       };
     }
     case TASK_TYPES.EDIT_TASK_SUCCEDED: {
-      const { id, title, status, style } = action.payload.task;
       const tasks = state.tasks.map((task) => {
-        if (task.id === id) {
-          return { ...task, title, status, style };
+        console.log(task.id);
+        console.log(action.payload.id);
+        if (task.id === action.payload.id) {
+          return { ...task, ...action.payload };
         }
         return task;
       });

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { TASK_STATUSES, TASK_STATUS_NAMES } from "../data";
+import { BOARDS } from "../data";
 import { createTask } from "../redux/actions";
 
 function AddTask() {
@@ -8,9 +8,7 @@ function AddTask() {
   const dispatch = useDispatch();
   const onCreateTask = (e) => {
     e.preventDefault();
-    dispatch(
-      createTask(inputValue, TASK_STATUS_NAMES[0], TASK_STATUSES.BACKLOG)
-    );
+    dispatch(createTask(inputValue, BOARDS[0]));
     setInputValue("");
   };
   return (

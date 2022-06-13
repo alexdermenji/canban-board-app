@@ -39,22 +39,28 @@ export function fetchTasksFailed(error) {
   };
 }
 
-export function createTask(title, status, style) {
+export function createTask(title, board) {
   return (dispatch) => {
-    api.createTask({ title, status, style }).then((resp) => {
-      dispatch(createTaskSucceded(resp.data));
-    });
+    api
+      .createTask({
+        title,
+        boardId: board.id,
+        boardTitle: board.title,
+        boardCode: board.code,
+        boardStyle: board.style,
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        dispatch(createTaskSucceded(resp.data));
+      });
   };
 }
 
-export const createTaskSucceded = ({ id, status, style, title }) => {
+export const createTaskSucceded = (props) => {
   return {
     type: TASK_TYPES.CREATE_TASK_SUCCEDED,
     payload: {
-      id,
-      status,
-      style,
-      title,
+      ...props,
     },
   };
 };
@@ -76,9 +82,7 @@ export function editTask(id, params = {}) {
 export function editTaskSucceeded(task) {
   return {
     type: TASK_TYPES.EDIT_TASK_SUCCEDED,
-    payload: {
-      task,
-    },
+    payload: task,
   };
 }
 
